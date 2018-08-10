@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
 import Landing from './components/Landing.js';
 import Library from './components/Library.js';
+import Album from './components/Album.js';
 import './App.css';
 
 class App extends Component {
@@ -18,6 +19,7 @@ class App extends Component {
       <main>
         <Route exact path="/" component={Landing} />
         <Route path="/library" component={Library} />
+        <Route path="/album" component={Album} />
       </main>
       </div>
     );
