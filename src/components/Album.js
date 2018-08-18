@@ -16,7 +16,7 @@ class Album extends Component {
       currentSong: album.songs[0],
       isPlaying: false,
       currentHoveredIndex: -1,
-      currentPlayingIndex: -1,
+      currentPlayingIndex: 0,
     };
 
     this.audioElement = document.createElement('audio');
@@ -38,16 +38,19 @@ class Album extends Component {
     this.setState({currentSong: song});
   }
 
-  handleSongClick(song, index=0) {
+  handleSongClick(song, index) {
     const isSameSong = this.state.currentSong === song;
 
     if (this.state.isPlaying && isSameSong) {
       this.pause();
+      this.setState({currentHoveredIndex: index});
     } else {
       if (!isSameSong) {
         this.setSong(song);
-        this.setState({currentPlayingIndex: index});
+        this.setState({currentHoveredIndex: -1});
       }
+      this.setState({currentPlayingIndex: index});
+      this.setState({currentHoveredIndex: -1});
       this.play();
     }
   }
@@ -66,6 +69,17 @@ class Album extends Component {
     const newIndex = Math.max(0, currentIndex - 1);
     const newSong = this.state.album.songs[newIndex];
     this.setSong(newSong);
+    this.setState({currentPlayingIndex: newIndex, currentHoveredIndex: -1});
+    this.play();
+  }
+
+  handleNextClick() {
+    const currentIndex = this.state.album.songs.findIndex(song => this.state.currentSong === song);
+    const totalSongs = this.state.album.songs.length-1;
+    const newIndex = Math.min(totalSongs, currentIndex + 1);
+    const newSong = this.state.album.songs[newIndex];
+    this.setSong(newSong);
+    this.setState({currentPlayingIndex: newIndex, currentHoveredIndex: -1});
     this.play();
   }
 
@@ -74,7 +88,7 @@ class Album extends Component {
       return 'icon ion-md-play';
     }
 
-    if(index === this.state.currentPlayingIndex) {
+    if(index === this.state.currentPlayingIndex && this.state.isPlaying) {
       return 'icon ion-md-pause';
     }
   }
@@ -116,8 +130,9 @@ class Album extends Component {
         </table>
         <PlayerBar isPlaying={this.state.isPlaying}
                     currentSong={this.state.currentSong}
-                    handleSongClick={() => this.handleSongClick(this.state.currentSong)}
-                    handlePrevClick={() => this.handlePrevClick()} />
+                    handleSongClick={() => this.handleSongClick(this.state.currentSong, this.state.currentPlayingIndex)}
+                    handlePrevClick={() => this.handlePrevClick()}
+                    handleNextClick={() => this.handleNextClick()} />
       </section>
     );
   }
