@@ -11,7 +11,7 @@ class SongControl extends Component {
   render() {
     return (
       <span id={`song_${this.props.songIndex}`} className={this.props.icon}>{this.props.icon === undefined ? this.innerHTML : ''}</span>
-    )
+    );
   }
 }
 
