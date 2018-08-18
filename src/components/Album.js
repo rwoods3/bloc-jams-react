@@ -17,6 +17,8 @@ class Album extends Component {
       isPlaying: false,
       currentHoveredIndex: -1,
       currentPlayingIndex: 0,
+      currentTime: 0,
+      duration: album.songs[0].duration,
     };
 
     this.audioElement = document.createElement('audio');
@@ -93,6 +95,32 @@ class Album extends Component {
     }
   }
 
+  componentDidMount() {
+    this.eventListeners = {
+      timeupdate: e => {
+        this.setState({ currentTime: this.audioElement.currentTime });
+      },
+      durationchange: e => {
+        this.setState({ duration: this.audioElement.duration });
+      }
+    };
+    this.audioElement.addEventListener('timeupdate', this.eventListeners.timeupdate);
+    this.audioElement.addEventListener('durationchange', this.eventListeners.durationchange);
+  }
+
+  componentWillUnmount() {
+    this.audioElement.src = null;
+    this.audioElement.removeEventListener('timeupdate', this.eventListeners.timeupdate);
+    this.audioElement.removeEventListener('durationchange', this.eventListeners.durationchange);
+
+  }
+
+  handleTimeChange(e) {
+    const newTime = this.audioElement.duration * e.target.value;
+    this.audioElement.currentTime = newTime;
+    this.setState({ currentTime: newTime });
+  }
+
   render() {
     return (
       <section className="album">
@@ -130,9 +158,12 @@ class Album extends Component {
         </table>
         <PlayerBar isPlaying={this.state.isPlaying}
                     currentSong={this.state.currentSong}
+                    currentTime={this.audioElement.currentTime}
+                    duration={this.audioElement.duration}
                     handleSongClick={() => this.handleSongClick(this.state.currentSong, this.state.currentPlayingIndex)}
                     handlePrevClick={() => this.handlePrevClick()}
-                    handleNextClick={() => this.handleNextClick()} />
+                    handleNextClick={() => this.handleNextClick()}
+                    handleTimeChange={(e) => this.handleTimeChange(e)} />
       </section>
     );
   }
