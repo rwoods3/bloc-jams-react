@@ -166,7 +166,7 @@ class Album extends Component {
                                                onMouseLeave={() => this.handleMouseLeave(index)}>
                 <td><SongControl songIndex={index} icon={this.getIcon(index)}>{index+1}</SongControl></td>
                 <td>{song.title}</td>
-                <td>{song.duration}</td>
+                <td>{this.formatTime(parseInt(song.duration))}</td>
               </tr>
             )}
           </tbody>
