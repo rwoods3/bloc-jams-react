@@ -9,18 +9,38 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-      <header>
-        <nav>
-          <Link to='/'>Landing</Link>
-          <Link to='/library'>Library</Link>
-        </nav>
-        <h1>Bloc Jams</h1>
+      <div className="mdl-layout mdl-js-layout">
+      <header className="mdl-layout__header mdl-layout__header--scroll">
+        <div className="mdl-layout__header-row">
+
+          <span className="mdl-layout-title">Bloc Jams</span>
+
+          <div className="mdl-layout-spacer"></div>
+
+          <nav className="mdl-navigation">
+            <a className="mdl-navigation__link" href=""><Link to='/'>Landing</Link></a>
+            <a className="mdl-navigation__link" href=""><Link to='/library'>Library</Link></a>
+          </nav>
+        </div>
       </header>
-      <main>
-        <Route exact path="/" component={Landing} />
-        <Route path="/library" component={Library} />
-        <Route path="/album/:slug" component={Album} />
+      <div className="mdl-layout__drawer">
+        <span className="mdl-layout-title">Bloc Jams</span>
+        <nav className="mdl-navigation">
+          <a className="mdl-navigation__link" href=""><Link to='/'>Landing</Link></a>
+          <a className="mdl-navigation__link" href=""><Link to='/library'>Library</Link></a>
+        </nav>
+      </div>
+      <main className="mdl-layout__content">
+        <div className="page-content">
+          <main>
+            <Route exact path="/" component={Landing} />
+            <Route path="/library" component={Library} />
+            <Route path="/album/:slug" component={Album} />
+          </main>
+        </div>
       </main>
+      </div>
+
       </div>
     );
   }

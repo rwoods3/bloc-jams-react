@@ -148,7 +148,7 @@ class Album extends Component {
           </div>
         </section>
 
-        <table id="song-list">
+        <table id="song-list" className="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
           <colgroup>
             <col id="song-number-column" />
             <col id="song-title-column" />
@@ -165,7 +165,7 @@ class Album extends Component {
                                                onMouseEnter={() => this.handleMouseEnter(index)}
                                                onMouseLeave={() => this.handleMouseLeave(index)}>
                 <td><SongControl songIndex={index} icon={this.getIcon(index)}>{index+1}</SongControl></td>
-                <td>{song.title}</td>
+                <td className="mdl-data-table__cell--non-numeric">{song.title}</td>
                 <td>{this.formatTime(parseInt(song.duration))}</td>
               </tr>
             )}

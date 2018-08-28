@@ -14,10 +14,13 @@ class Library extends Component {
       {
         this.state.albums.map((album, index) =>
           <Link key={index} to={`/album/${album.slug}`}>
-            <img src={album.albumCover} alt={album.title} />
-            <div>{album.title}</div>
-            <div>{album.artist}</div>
-            <div>{album.songs.length} songs</div>
+            <div className="demo-card-image mdl-card mdl-shadow--2dp" style={{background: "url("+album.albumCover+") center / cover"}}>
+              <div className="mdl-card__title mdl-card--expand">{album.title}</div>
+              <div className="mdl-card__actions">
+                <div className="demo-card-image__filename">{album.artist}</div>
+                <div className="demo-card-image__filename">{album.songs.length} songs</div>
+              </div>
+            </div>
           </Link>
         )
       }
