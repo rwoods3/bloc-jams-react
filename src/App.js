@@ -18,16 +18,16 @@ class App extends Component {
           <div className="mdl-layout-spacer"></div>
 
           <nav className="mdl-navigation">
-            <a className="mdl-navigation__link" href=""><Link to='/'>Landing</Link></a>
-            <a className="mdl-navigation__link" href=""><Link to='/library'>Library</Link></a>
+            <Link className="mdl-navigation__link" to='/'>Landing</Link>
+            <Link className="mdl-navigation__link" to='/library'>Library</Link>
           </nav>
         </div>
       </header>
       <div className="mdl-layout__drawer">
         <span className="mdl-layout-title">Bloc Jams</span>
         <nav className="mdl-navigation">
-          <a className="mdl-navigation__link" href=""><Link to='/'>Landing</Link></a>
-          <a className="mdl-navigation__link" href=""><Link to='/library'>Library</Link></a>
+          <Link className="mdl-navigation__link" to='/'>Landing</Link>
+          <Link className="mdl-navigation__link" to='/library'>Library</Link>
         </nav>
       </div>
       <main className="mdl-layout__content">

@@ -140,7 +140,7 @@ class Album extends Component {
     return (
       <section className="album">
         <section id="album-info">
-          <img id="album-cover-art" src={this.state.album.albumCover} />
+          <img alt="Album Cover" id="album-cover-art" src={this.state.album.albumCover} />
           <div className="album-details">
             <h1 id="album-title">{this.state.album.title}</h1>
             <h2 className="artist">{this.state.album.artist}</h2>
@@ -166,7 +166,7 @@ class Album extends Component {
                                                onMouseLeave={() => this.handleMouseLeave(index)}>
                 <td><SongControl songIndex={index} icon={this.getIcon(index)}>{index+1}</SongControl></td>
                 <td className="mdl-data-table__cell--non-numeric">{song.title}</td>
-                <td>{this.formatTime(parseInt(song.duration))}</td>
+                <td>{this.formatTime(parseInt(song.duration, 10))}</td>
               </tr>
             )}
           </tbody>
